@@ -27,8 +27,11 @@ async def main():
     # You can print all the dialogs/conversations that you are part of:
     async for dialog in client.iter_dialogs():
         dest = await client.get_entity(dialog.id)
-        #print(dialog.name, ':', dest.phone)   
-        print(dialog.name, 'ID:', dialog.id)   
+        try:
+            print(dialog.name, ':', dest.phone) 
+        except AttributeError:
+            print(dialog.name, ': Esta entidad no posee un telefono')
+        #print(dialog.name, 'ID:', dialog.id)   
     # You can send messages to yourself...
     # await client.send_message('me', 'Probando Telethon')
     # ...to some chat ID
