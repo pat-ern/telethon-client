@@ -2,7 +2,7 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-from telethon import TelegramClient, events
+from telethon import TelegramClient, events, utils
 from telethon import functions, types
 import sys
 
@@ -20,7 +20,9 @@ async def main():
     me = await client.get_me()
     # You can send messages to yourself...
 
-    message = await client.send_message(destinatario, mensaje)
+    dest = await client.get_entity(destinatario)
+
+    message = await client.send_message(dest, mensaje)
     print(me.username + ': ' + message.raw_text)
 
     # You can reply to messages directly if you have a message object

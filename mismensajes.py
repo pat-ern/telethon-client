@@ -1,4 +1,5 @@
 from telethon import TelegramClient
+from telethon import utils
 import sys
 
 # Remember to use your own values from my.telegram.org!
@@ -65,5 +66,28 @@ async def main():
             #path = await message.download_media()
             #print('File saved to', path)  # printed after download is done
 
+    me = await client.get_entity('me')
+    print(utils.get_display_name(me))
+
+    chat = await client.get_input_entity('username')
+    async for message in client.iter_messages(chat):
+        ...
+
+    # Note that you could have used the username directly, but it's
+    # good to use get_input_entity if you will reuse it a lot.
+    async for message in client.iter_messages('username'):
+        ...
+
+    # Note that for this to work the phone number must be in your contacts
+    peer_id = await client.get_peer_id('+56978751055')
+    print(utils.get_display_name(peer_id))
+
+    some_id = await client.get_entity('+56978751055')
+    print(utils.get_display_name(some_id))
+    print(some_id)
+
 with client:
     client.loop.run_until_complete(main())
+
+
+
