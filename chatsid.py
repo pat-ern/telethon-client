@@ -1,4 +1,4 @@
-from telethon import TelegramClient
+from telethon import TelegramClient, utils
 import sys
 
 # Remember to use your own values from my.telegram.org!
@@ -23,8 +23,11 @@ async def main():
     print('Usuario: ', username)
     print('Telefono: ', me.phone)
     print('-----------------------')'''
+
     # You can print all the dialogs/conversations that you are part of:
     async for dialog in client.iter_dialogs():
+        dest = await client.get_entity(dialog.id)
+        #print(dialog.name, ':', dest.phone)   
         print(dialog.name, 'ID:', dialog.id)   
     # You can send messages to yourself...
     # await client.send_message('me', 'Probando Telethon')
