@@ -11,13 +11,14 @@ client = TelegramClient('anon', api_id, api_hash)
 @client.on(events.NewMessage)
 async def my_event_handler(event):
 
-    #dest = await client.get_entity(event.from_id.user_id)
-    #nombre = utils.get_display_name(dest)
+    try:
+        dest = await client.get_entity(event.from_id.user_id)
+        nombre = utils.get_display_name(dest)
+    except AttributeError:
+        nombre = "Patricio Villarroel"
 
-    #print(f"{nombre}: {event.raw_text}")
+    print(f"{event.date} {nombre}: {event.raw_text}")
     #print(f"{event.date} {event.from_id.user_id} {event.raw_text}")
-    print(nombre)
-    print(event.raw_text)
     #if 'hello' in event.raw_text:
     #    await event.reply('hi!')
 
